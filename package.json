@@ -1,0 +1,30 @@
+{
+  "name": "react-metaweather-app",
+  "version": "1.0.0",
+  "description": "A simple React SPA that allows user to search a city and view the 5 day weather forecast\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "git+https://github.com/mji-techshot/react-metaweather-app.git",
+  "author": "Melvin Isican",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mji-techshot/react-metaweather-app/issues"
+  },
+  "homepage": "https://github.com/mji-techshot/react-metaweather-app#readme",
+  "dependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.4",
+    "@babel/plugin-proposal-class-properties": "^7.5.0",
+    "@babel/plugin-proposal-function-bind": "^7.2.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.5.0",
+    "@babel/preset-env": "^7.5.4",
+    "@babel/preset-react": "^7.0.0",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24"
+  }
+}
