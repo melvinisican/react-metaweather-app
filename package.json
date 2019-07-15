@@ -13,6 +13,16 @@
     "url": "https://github.com/mji-techshot/react-metaweather-app/issues"
   },
   "homepage": "https://github.com/mji-techshot/react-metaweather-app#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx}": [
+      "yarn lint"
+    ]
+  },
   "dependencies": {
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
@@ -35,6 +45,8 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.14.2",
+    "husky": "^3.0.0",
+    "lint-staged": "^9.2.0",
     "prettier": "^1.18.2"
   }
 }
