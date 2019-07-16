@@ -108,7 +108,11 @@ class App extends Component {
             </div>
             <div>
               {isLoading ? (
-                <Loading />
+                <div className="row center-xs center-md center-lg">
+                  <div className="col-xs-1 col-md-1 col-lg-1">
+                    <Loading />
+                  </div>
+                </div>
               ) : (
                 <QueryCityResults
                   data={citiesResult}

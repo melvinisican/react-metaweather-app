@@ -76,9 +76,11 @@ class CityWeatherDetails extends Component {
       <div className="container">
         <Card leftButton={<BackButton />}>
           {isLoading ? (
-            <div>
-              <Loading />
-              <p>Fetching Weather Data</p>
+            <div className="row center-xs center-md center-lg">
+              <div className="col-xs-1 col-md-1 col-lg-1 space-up">
+                <Loading />
+                <p>Fetching Weather Data</p>
+              </div>
             </div>
           ) : (
             <div>
