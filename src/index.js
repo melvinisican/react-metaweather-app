@@ -8,13 +8,15 @@ import Notfound from './pages/NotFound'
 import './index.scss'
 
 const routing = (
-  <Router>
-    <Switch>
-      <Route exact path="/" component={App} />
-      <Route path="/city/:id" component={CityWeatherDetails} />
-      <Route component={Notfound} />
-    </Switch>
-  </Router>
+  <div className="app">
+    <Router>
+      <Switch>
+        <Route exact path="/" component={App} />
+        <Route path="/city/:id" component={CityWeatherDetails} />
+        <Route component={Notfound} />
+      </Switch>
+    </Router>
+  </div>
 )
 
 render(routing, document.getElementById('root'))

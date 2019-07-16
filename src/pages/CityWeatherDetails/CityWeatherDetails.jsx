@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { get } from 'lodash'
 
+import Card from '../../components/Card'
+import Loading from '../../components/Loading'
 import WeatherForecast from '../../components/WeatherForecast'
 
 const url = 'https://www.metaweather.com/api/location/'
@@ -9,6 +11,7 @@ class CityWeatherDetails extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      isLoading: true,
       cityWeather: {},
       fiveDayForecast: [],
     }
@@ -45,10 +48,16 @@ class CityWeatherDetails extends Component {
       if (response.ok) {
         const jsonResponse = await response.json()
         this.setState({
+          isLoading: true,
           cityWeather: jsonResponse,
           fiveDayForecast: this.getFiveDayForecast(jsonResponse),
         })
+      } else {
+        this.setState({ fetchError: true })
       }
+      this.setState({ isLoading: false })
+      // eslint-disable-next-line no-console
+      console.log(response)
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error)
@@ -62,14 +71,26 @@ class CityWeatherDetails extends Component {
   }
 
   render() {
-    const { cityWeather, fiveDayForecast } = this.state
+    const { isLoading, cityWeather, fiveDayForecast, fetchError } = this.state
 
-    // eslint-disable-next-line no-console
-    console.log(this.state)
     return (
-      <div>
-        <p>{`5 Day Foreacast for ${get(cityWeather, ['title'])}`}</p>
-        <WeatherForecast data={fiveDayForecast} />
+      <div className="container">
+        <Card>
+          {isLoading ? (
+            <div>
+              <Loading />
+              <p>Fetching Weather Data</p>
+            </div>
+          ) : (
+            <div>
+              <h2>{`5 Day Foreacast for ${get(cityWeather, ['title'])}`}</h2>
+              <WeatherForecast data={fiveDayForecast} />
+              {fetchError ? (
+                <p>Something went wrong while fetching. Try Again</p>
+              ) : null}
+            </div>
+          )}
+        </Card>
       </div>
     )
   }

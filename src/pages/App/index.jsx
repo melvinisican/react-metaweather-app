@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { debounce } from 'lodash'
 
+import Card from '../../components/Card'
 import Loading from '../../components/Loading'
 import SearchInput from '../../components/SearchInput'
 import QueryCityResults from '../../components/QueryCityResults'
@@ -59,6 +60,10 @@ class App extends Component {
           isLoading: false,
           citiesResult: this.formatCityQueryResults(jsonResponse),
         })
+      } else {
+        // eslint-disable-next-line no-unused-expressions
+        this.state.query === '' &&
+          this.setState({ isLoading: false, citiesResult: [] })
       }
     } catch (error) {
       // eslint-disable-next-line no-console
@@ -71,24 +76,24 @@ class App extends Component {
     return (
       <div className="app">
         <div className="container">
-          <div className="row center-xs center-md center-lg">
-            <div className="col-xs col-md col-lg">
+          <Card>
+            <h2>Simple Weather Application</h2>
+            <hr />
+            <div>
               <SearchInput
                 name="cityInput"
                 onChange={this.handleChangeCityQueryInput}
                 value={query}
               />
             </div>
-          </div>
-          <div className="row center-xs center-md center-lg">
-            <div className="col-xs col-md col-lg">
+            <div>
               {isLoading ? (
                 <Loading />
               ) : (
                 <QueryCityResults data={citiesResult} />
               )}
             </div>
-          </div>
+          </Card>
         </div>
       </div>
     )
