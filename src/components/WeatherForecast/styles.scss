@@ -1,31 +1,36 @@
-.table {
-  border-collapse: separate;
-  margin: 0 0 var(--margin) 0;
+table {
+  font-family: Tahoma, Geneva, sans-serif;
+  border: 5px solid #FFFFFF;
+  background-color: #EEEEEE;
   width: 100%;
-  font-size: 0.8em;
-
-  tbody tr {
-    border: none;
-  }
-  
-  tbody tr:first-child td {
-    border-top-width: 1px;
-  }
-
-  td {
-    padding: 0.4em 0.7em;
-    border-left-width: 0;
-    border-top-width: 0;
-  }
-
-  tbody tr:nth-child(2n + 1) {
-    background-color: var(--color-bg);
-  }
-  
-  tbody td {
-    border: solid 1px var(--color-border);
-    border-left-width: 0;
-    border-top-width: 0;
-  }
+  text-align: left;
+  border-collapse: collapse;
+}
+table td, table th {
+  border: 0px solid #AAAAAA;
+  padding: 10px 10px;
+}
+table tbody td {
+  font-size: 18px;
+  color: #3A3A3A;
+}
+table tr:nth-child(even) {
+  background: #AAAFB4;
 }
 
+.weather-state {
+  font-weight: 500;
+  font-size: 22px;
+  color: #000;
+  letter-spacing: 1.6px;
+}
+
+.weather-state-alt {
+  font-weight: 100;
+  font-size: 18px;
+  color: #000;
+}
+
+.text-center {
+  text-align: center;
+}

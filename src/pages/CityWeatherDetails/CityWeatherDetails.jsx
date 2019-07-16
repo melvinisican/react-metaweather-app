@@ -56,8 +56,6 @@ class CityWeatherDetails extends Component {
         this.setState({ fetchError: true })
       }
       this.setState({ isLoading: false })
-      // eslint-disable-next-line no-console
-      console.log(response)
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error)
@@ -83,7 +81,11 @@ class CityWeatherDetails extends Component {
             </div>
           ) : (
             <div>
-              <h2>{`5 Day Foreacast for ${get(cityWeather, ['title'])}`}</h2>
+              <h2 className="title">Simple Weather Application</h2>
+              <hr />
+              <h4 className="description">
+                {`5 Day Foreacast for ${get(cityWeather, ['title'])}`}
+              </h4>
               <WeatherForecast data={fiveDayForecast} />
               {fetchError ? (
                 <p>Something went wrong while fetching. Try Again</p>

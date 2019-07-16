@@ -28,16 +28,24 @@ const WeatherForecast = props => {
               return (
                 <tr key={formatDate(weather.applicable_date)}>
                   <td>
-                    <p>{formatDate(weather.applicable_date)}</p>
-                    <p>{weather.weather_state_name}</p>
+                    <p className="weather-state-alt">
+                      {formatDate(weather.applicable_date)}
+                    </p>
+                    <p className="weather-state">
+                      {weather.weather_state_name}
+                    </p>
                   </td>
                   <td>
-                    <p>Min</p>
-                    <p>{formatTemperatureLabel(weather.min_temp)}</p>
+                    <p className="weather-state text-center">
+                      {formatTemperatureLabel(weather.min_temp)}
+                    </p>
+                    <p className="weather-state-alt text-center">Min</p>
                   </td>
                   <td>
-                    <p>Max</p>
-                    <p>{formatTemperatureLabel(weather.max_temp)}</p>
+                    <p className="weather-state text-center">
+                      {formatTemperatureLabel(weather.max_temp)}
+                    </p>
+                    <p className="weather-state-alt text-center">Max</p>
                   </td>
                 </tr>
               )
