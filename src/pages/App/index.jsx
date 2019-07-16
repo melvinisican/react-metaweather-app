@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { debounce } from 'lodash'
 
+import Loading from '../../components/Loading'
 import SearchInput from '../../components/SearchInput'
 import QueryCityResults from '../../components/QueryCityResults'
 
@@ -14,6 +15,7 @@ class App extends Component {
     this.state = {
       query: 'san',
       citiesResult: [],
+      isLoading: true,
     }
     this.debounceCitySearch = debounce(this.handleCitySearchQueryInput, 1000)
   }
@@ -32,7 +34,7 @@ class App extends Component {
   handleChangeCityQueryInput = event => {
     // eslint-disable-next-line no-console
     // console.log(event)
-    this.setState({ query: event.target.value }, () => {
+    this.setState({ query: event.target.value, isLoading: true }, () => {
       this.debounceCitySearch(this.state.query)
     })
   }
@@ -54,6 +56,7 @@ class App extends Component {
       if (response.ok) {
         const jsonResponse = await response.json()
         this.setState({
+          isLoading: false,
           citiesResult: this.formatCityQueryResults(jsonResponse),
         })
       }
@@ -64,16 +67,29 @@ class App extends Component {
   }
 
   render() {
-    // eslint-disable-next-line no-console
-    console.log(this.state)
+    const { citiesResult, isLoading, query } = this.state
     return (
       <div className="app">
-        <SearchInput
-          name="cityInput"
-          onChange={this.handleChangeCityQueryInput}
-          value={this.state.query}
-        />
-        <QueryCityResults data={this.state.citiesResult} />
+        <div className="container">
+          <div className="row center-xs center-md center-lg">
+            <div className="col-xs col-md col-lg">
+              <SearchInput
+                name="cityInput"
+                onChange={this.handleChangeCityQueryInput}
+                value={query}
+              />
+            </div>
+          </div>
+          <div className="row center-xs center-md center-lg">
+            <div className="col-xs col-md col-lg">
+              {isLoading ? (
+                <Loading />
+              ) : (
+                <QueryCityResults data={citiesResult} />
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

@@ -1,6 +1,7 @@
 .scroller {
-  margin: 0 auto;
-  height: 300px;
-  width: 300px;
+  margin: 0;
+  height: 360px;
+  width: 100%;
   overflow: auto;
+  text-align: start;
 }

@@ -1,10 +1,9 @@
 .app {
   background: #fff;
   height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 
   h2 {
     font-size: 50px;
@@ -13,22 +12,6 @@
     letter-spacing: 1.6px;
     text-transform: capitalize;
     padding-bottom: 20px;
-  }
-
-  img {
-    width: 200px;
-  }
-
-  a {
-    font-size: 20px;
-    padding: 5px 0;
-    margin-top: 40px;
-    background: transparent;
-    border-bottom: 1.4px solid #3cbef1;
-    color: #000;
-    text-decoration: none;
-    text-transform: capitalize;
-    cursor: pointer;
   }
 
   footer {
@@ -40,8 +23,8 @@
 }
 
 .container {
-  margin-right: auto;
-  margin-left: auto;
+  width: 100%;
+  margin: 0 auto;
   padding-right: 2rem;
   padding-left: 2rem;
 }
@@ -80,6 +63,7 @@
 @media only screen and (min-width: 62em) {
   .container {
     width: 61rem;
+    margin: 0 auto;
   }
 
   .col-md {
@@ -96,6 +80,33 @@
   }
 
   .center-md {
+    -ms-flex-pack: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+@media only screen and (min-width: 62em) {
+  .container {
+    width: 71rem;
+    margin: 0 auto;
+  }
+
+  .col-lg {
+    -ms-flex-preferred-size: 75%;
+    flex-basis: 75%;
+    max-width: 75%;
+  }
+
+  .start-lg {
+    -ms-flex-pack: start;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    text-align: start;
+  }
+
+  .center-lg {
     -ms-flex-pack: center;
     -webkit-box-pack: center;
     justify-content: center;
