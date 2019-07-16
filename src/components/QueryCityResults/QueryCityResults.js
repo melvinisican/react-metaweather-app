@@ -5,9 +5,9 @@ import { kebabCase } from 'lodash'
 import List from '../List'
 import ScrollView from '../ScrollView'
 
+import './styles.scss'
+
 const CitiesResultListItem = props => {
-  // eslint-disable-next-line no-console
-  console.log(kebabCase(props.label))
   return (
     <Link
       to={{
