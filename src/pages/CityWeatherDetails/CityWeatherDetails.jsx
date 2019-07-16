@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { get } from 'lodash'
 
+import BackButton from '../../components/BackButton'
 import Card from '../../components/Card'
 import Loading from '../../components/Loading'
 import WeatherForecast from '../../components/WeatherForecast'
@@ -73,7 +74,7 @@ class CityWeatherDetails extends Component {
 
     return (
       <div className="container">
-        <Card>
+        <Card leftButton={<BackButton />}>
           {isLoading ? (
             <div>
               <Loading />

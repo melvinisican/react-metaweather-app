@@ -14,33 +14,16 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      query: 'san',
+      noQuery: true,
+      query: '',
       citiesResult: [],
-      isLoading: true,
+      isLoading: false,
+      fetchFailed: false,
     }
     this.debounceCitySearch = debounce(this.handleCitySearchQueryInput, 1000)
   }
 
-  componentDidMount() {
-    this.handleCitySearchQueryInput()
-  }
-
   formatCityQueryResults = data => {
-    return data.map(item => ({
-      label: item.title,
-      data: item,
-    }))
-  }
-
-  handleChangeCityQueryInput = event => {
-    // eslint-disable-next-line no-console
-    // console.log(event)
-    this.setState({ query: event.target.value, isLoading: true }, () => {
-      this.debounceCitySearch(this.state.query)
-    })
-  }
-
-  handleCitySearchQueryInput = async () => {
     /**
      * location sample
      * {
@@ -50,7 +33,26 @@ class App extends Component {
      *  woeid: 2487956
      * }
      */
+    return data.map(item => ({
+      label: item.title,
+      data: item,
+    }))
+  }
 
+  handleChangeCityQueryInput = event => {
+    this.setState(
+      {
+        query: event.target.value,
+        isLoading: true,
+        noQuery: event.target.value === '',
+      },
+      () => {
+        this.debounceCitySearch(this.state.query)
+      }
+    )
+  }
+
+  handleCitySearchQueryInput = async () => {
     const urlWithQuery = `https://cors-anywhere.herokuapp.com/${url}search/?query=${this.state.query}`
     try {
       const response = await fetch(urlWithQuery)
@@ -60,10 +62,27 @@ class App extends Component {
           isLoading: false,
           citiesResult: this.formatCityQueryResults(jsonResponse),
         })
+      } else if (this.state.query === '') {
+        this.setState({
+          isLoading: false,
+          citiesResult: [],
+          noQuery: true,
+        })
       } else {
+        this.setState({
+          isLoading: false,
+          citiesResult: [],
+          fetchFailed: true,
+        })
+      }
+
+      if (response.statusText === 'Forbidden') {
         // eslint-disable-next-line no-unused-expressions
         this.state.query === '' &&
-          this.setState({ isLoading: false, citiesResult: [] })
+          this.setState({
+            isLoading: false,
+            citiesResult: [],
+          })
       }
     } catch (error) {
       // eslint-disable-next-line no-console
@@ -72,14 +91,15 @@ class App extends Component {
   }
 
   render() {
-    const { citiesResult, isLoading, query } = this.state
+    const { citiesResult, isLoading, query, fetchFailed, noQuery } = this.state
     return (
       <div className="app">
         <div className="container">
           <Card>
-            <h2>Simple Weather Application</h2>
+            <h2 className="title">Simple Weather Application</h2>
             <hr />
             <div>
+              <p className="label">Enter a City Name</p>
               <SearchInput
                 name="cityInput"
                 onChange={this.handleChangeCityQueryInput}
@@ -90,7 +110,12 @@ class App extends Component {
               {isLoading ? (
                 <Loading />
               ) : (
-                <QueryCityResults data={citiesResult} />
+                <QueryCityResults
+                  data={citiesResult}
+                  error={fetchFailed}
+                  query={query}
+                  noQuery={noQuery}
+                />
               )}
             </div>
           </Card>
